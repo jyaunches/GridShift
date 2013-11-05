@@ -5,15 +5,14 @@ class GridShift
     starting_x = 1
     starting_y = dim_size
 
-    tracks = []
+    result = {}
     num_tracks.times do |index|
       track_min_dimension = (starting_x + index)
       track_max_dimension = (starting_y - index)
       new_track = pull_track(track_min_dimension, track_max_dimension, input)
-      tracks << shift_track(new_track, track_min_dimension, track_max_dimension)
+      result.merge! shift_track(new_track, track_min_dimension, track_max_dimension)
     end
-
-    tracks
+    result
   end
 
   private

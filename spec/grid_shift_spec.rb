@@ -21,31 +21,22 @@ describe GridShift do
   let(:grid_shift) { GridShift.new }
 
   it 'should collect and shift tracks' do
-    tracks = grid_shift.collect_and_shift_tracks four_dim_input, 4
-    tracks.size.should == 2
-    tracks[0].should == {'E' => [1, 1], 'A' => [1, 2], 'B' => [1, 3], 'C' => [1, 4],
-                         'I' => [2, 1],                               'D' => [2, 4],
-                         'M' => [3, 1],                               'H' => [3, 4],
+    result = grid_shift.collect_and_shift_tracks four_dim_input, 4
+    result.should == {'E' => [1, 1], 'A' => [1, 2], 'B' => [1, 3], 'C' => [1, 4],
+                         'I' => [2, 1], 'J' => [2, 2], 'F' => [2, 3], 'D' => [2, 4],
+                         'M' => [3, 1], 'K' => [3, 2], 'G' => [3, 3], 'H' => [3, 4],
                          'N' => [4, 1], 'O' => [4, 2], 'P' => [4, 3], 'L' => [4, 4]}
-
-    tracks[1].should == {'J' => [2, 2], 'F' => [2, 3], 'K' => [3, 2], 'G' => [3, 3]}
   end
 
   it 'should collect and shift tracks for 3 tracks' do
-    tracks = grid_shift.collect_and_shift_tracks five_dim_input, 5
-    tracks.size.should == 3
+    result = grid_shift.collect_and_shift_tracks five_dim_input, 5
 
-    tracks[0].should ==  {'F' => [1, 1], 'A' => [1, 2], 'B' => [1, 3], 'C' => [1, 4], 'D' => [1, 5],
-                          'K' => [2, 1],                                              'E' => [2, 5],
-                          'P' => [3, 1],                                              'J' => [3, 5],
-                          'U' => [4, 1],                                              'O' => [4, 5],
+    result.should ==  {'F' => [1, 1], 'A' => [1, 2], 'B' => [1, 3], 'C' => [1, 4], 'D' => [1, 5],
+                          'K' => [2, 1], 'L' => [2, 2], 'G' => [2, 3], 'H' => [2, 4], 'E' => [2, 5],
+                          'P' => [3, 1], 'Q' => [3, 2], 'M' => [3, 3], 'I' => [3, 4], 'J' => [3, 5],
+                          'U' => [4, 1], 'R' => [4, 2], 'S' => [4, 3], 'N' => [4, 4], 'O' => [4, 5],
                           'V' => [5, 1], 'W' => [5, 2], 'X' => [5, 3], 'Y' => [5, 4], 'T' => [5, 5]}
 
-    tracks[1].should == { 'L' => [2, 2], 'G' => [2, 3], 'H' => [2, 4],
-                          'Q' => [3, 2],                'I' => [3, 4],
-                          'R' => [4, 2], 'S' => [4, 3], 'N' => [4, 4],}
-
-    tracks[2].should == { 'M' => [3, 3] }
   end
 
 end
