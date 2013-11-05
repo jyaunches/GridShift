@@ -1,6 +1,6 @@
 class GridShift
   def collect_and_shift_tracks(input, dim_size)
-    num_tracks = dim_size/2.0.ceil
+    num_tracks = (dim_size/2.0).ceil
 
     starting_x = 1
     starting_y = dim_size
