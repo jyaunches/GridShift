@@ -1,51 +1,36 @@
 class GridShift
-  def collect_and_shift_tracks(input, dim_size)
+  def collect_and_shift_tracks input, dim_size
     num_tracks = (dim_size/2.0).ceil
 
-    starting_x = 1
-    starting_y = dim_size
+    shifted_result = []
+    dim_size.times { |i| shifted_result << [] }
 
-    result = {}
-    num_tracks.times do |index|
-      track_min_dimension = (starting_x + index)
-      track_max_dimension = (starting_y - index)
-      new_track = pull_track(track_min_dimension, track_max_dimension, input)
-      result.merge! shift_track(new_track, track_min_dimension, track_max_dimension)
-    end
-    result
-  end
+    num_tracks.times do |track|
+      starting_low = track
+      starting_high = dim_size - 1 - track
 
-  private
+      num_items_shifting = starting_high - starting_low
 
-  def shift_track(track, min_dim, max_dim)
-    track.each do |k, v|
-      x_pos = 0
-      y_pos = 1
+      num_items_shifting.times do |index|
+        #top row
+        shifted_result[starting_low][index + track +1] = input[starting_low][index + track]
 
-      x_value = v[x_pos]
-      y_value = v[y_pos]
+        #right side
+        shifted_result[index + track +1][starting_high] = input[index + track][starting_high]
 
-      if x_value == min_dim && y_value != max_dim
-        v[y_pos] += 1
-      elsif y_value == max_dim && x_value != max_dim
-        v[x_pos] += 1
-      elsif x_value == max_dim && y_value != min_dim
-        v[y_pos] -= 1
-      elsif y_value == min_dim && x_value != min_dim
-        v[x_pos] -= 1
+        #bottom
+        shifted_result[starting_high][index + track] = input[starting_high][index  + track + 1]
+
+        #left side
+        shifted_result[index + track][starting_low] = input[index  + track + 1][starting_low]
       end
 
+      if num_items_shifting == 0
+        lone_item = input[starting_high][starting_low]
+        shifted_result[starting_high][starting_low] = lone_item
+      end
     end
+    shifted_result
   end
 
-  def pull_track(x_pos, y_pos, input)
-    input.select do |k, v|
-      result = nil
-      if v.include?(x_pos) || v.include?(y_pos)
-        result = input[k]
-        input.delete k
-      end
-      result
-    end
-  end
 end
