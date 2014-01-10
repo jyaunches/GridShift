@@ -6,10 +6,10 @@ For a given grid...
 
 Example Grid:
 
-    [‘A’, 'B', 'C', 'D',
-     'E', 'F', 'G', 'H',
-     'I', 'J', 'K', 'L',
-     'M', 'N', 'O', ‘P’]
+    [[‘A’, 'B', 'C', ‘D’],
+     [‘E’, 'F', 'G', ‘H’],
+     [‘I’, 'J', 'K', ‘L’],
+     [‘M’, 'N', 'O', ‘P’]]
 
 The characters in each position should be shifted clockwise.. relative to their position.
 
@@ -29,13 +29,13 @@ Given the above grid, items would move as follows:
 
 As such, the expected output would be:
 
-    [‘E’, 'A', 'B', 'C',
-     'I', 'J', 'F', 'D',
-     'M', 'K', 'G', 'H',
-     'N', 'O', 'P', ‘L’]
+    [[‘E’, 'A', 'B', ‘C’],
+     [‘I’, 'J', 'F', ‘D’],
+     [‘M’, 'K', 'G', ‘H’],
+     [’N’, 'O', 'P', ‘L’]]
 
 
-My solution is n^2 in complexity... The collection size is n^2 and the algorithm loops through this once to divide the collection into tracks and again through each track to shift the items within.
+In terms of complexity, my solution makes one pass through each logical track.. making it an order of n if n is the total number of items in the grid. 
 
 
 
